@@ -1,6 +1,16 @@
+// env var
+require("dotenv").config();
+
+// libraries
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
+
+// microservices routes
+import Auth from "./API/Auth";
+
+// Database connection
+import ConnectDB from "./database/connection";
 
 const zomato = express();
 
@@ -10,6 +20,22 @@ zomato.use(express.urlencoded({ extended: false }));
 zomato.use(helmet());
 zomato.use(cors());
 
+// Application Routes
+zomato.use("/auth", Auth);
+
 zomato.get("/", (req, res) => res.json({ message: "Setup success" }));
 
-zomato.listen(4000, () => console.log("Server is runnig!!!"));
+zomato.listen(4000, () => 
+  ConnectDB()
+    .then(() => console.log("Server is runnig!!!"))
+    .catch(() =>
+      console.log("Server is running but database connection failed!!")
+      )  
+);
+
+/*"email": "sddk@l.com",
+        "password": "1234566",
+        "fullname": "Elon Musk",
+        "phoneNumber": 1234567890 
+        
+        eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImZ1bGxuYW1lIjoiRWxvbiBNdXNrIiwiZW1haWwiOiJzZGRrQGwuY29tIn0sImlhdCI6MTYyOTk1OTEwOH0.L3Gt4-D5QiH0pWdWuT4LAkutSWRMqaNEQF22swis5rY*/
