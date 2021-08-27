@@ -20,7 +20,7 @@ UserSchema.methods.generateJwtToken = function () {
 
 UserSchema.statics.findByEmailAndPhone = async ({ email, phoneNumber }) => {
   // check wheather email exist
-  const checkUuserByEmail = await UserModel.findOne({ email });
+  const checkUserByEmail = await UserModel.findOne({ email });
   const checkUserByPhone = await UserModel.findOne({ phoneNumber });
 
 
@@ -38,19 +38,20 @@ UserSchema.statics.findByEmailAndPassword = async ({ email, password }) => {
 
   // compare password
   const doesPasswordMatch = await bcrypt.compare(password, user.password);
-  if(!doesPasswordMatch) throw new Error("invalid password!!");
+  if(!doesPasswordMatch) throw new Error("invalid Password!!");
 
   return user;
 };
 
-UserSchema.pre("save", function (next) {
+UserSchema.pre("save", function(next) {
   const user = this;
    
   // password is modified
-  if(user.isModified("password")) return next();
+  if(!user.isModified("password")) return next();
+
   // generate salt
   bcrypt.genSalt(8, (error, salt) => {
-    if(error) return next (error);
+    if(error) return next(error);
 
     // hash the password
     bcrypt.hash(user.password, salt, (error, hash) => {
