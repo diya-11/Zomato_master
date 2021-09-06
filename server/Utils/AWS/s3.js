@@ -15,4 +15,8 @@ export const s3Upload = (options) => {
          return resolve(data);
     })
   );
-};
+}; 
+
+
+/*AKIA3EJ7ZNBTDUSQKTYF
+aXWdryHGohNiu8iqfhAGkLJdS4ROm2cKxcYJe5No*/
