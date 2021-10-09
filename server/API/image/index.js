@@ -30,7 +30,7 @@ Router.post("/", upload.single("file") ,async(req,res)=> {
 
  //S3 bucket options
  const bucketOptions = {
-   Bucket: "zomatoawsbucket",
+   Bucket: "shapeaijulybatch123",
    Key: file.originalname,
    Body: file.buffer,
    ContentType: file.mimetype,

@@ -1,49 +1,48 @@
-// Libraries
 import express from "express";
-import passport from "passport";
 
-// Database modal
-import { ReviewModel } from "../../database/allModels";
+import {ReviewModel} from "../../database/allModels";
 
 const Router = express.Router();
 
 /*
-Route     /food/new
-Des       Add new food review/rating
-Params    _id, _foodID
-body      reviw object
-Access    Public
-Method    POST
+Route            /new
+Des              Add new review
+Params           none
+BODY             Review object
+Access           Public
+Method           POST
 */
-Router.post("/new", async (req, res) => {
-    try{
-        const { reviewData } = req.body;
 
-        await ReviewModel.create(reviewData);
+Router.post("/new", async(req,res)=> {
+  try {
+    const { reviewData } = req.body;
 
-        return res.json({ review: "Successfully Created Review." });
-    }catch (error) {
-        return res.status(500).json({ error: error.message });
-    }
+    await ReviewModel.create(reviewData);
+
+    return res.json({review: "Successfully Created Review"});
+  } catch (error) {
+    return res.status(500).json({error: error.message});
+  }
 });
 
 /*
-Route     /delete
-Des       Add new food review/rating
-Params    _id, _foodID
-body      reviw object
-Access    Public
-Method    POST
+Route            /delete
+Des              Delete a review
+Params           _id
+Access           Public
+Method           DELETE
 */
-Router.delete("/delete/:_id", async (req, res) => {
-    try{
-        const { _id } = req.params;
 
-        await ReviewModel.findByIdAndDelete(_id);
-        return res.json({ review: "Successfully Deleted the Review"});
-    }catch (error) {
-        return res.status(500).json({ error: error.message });
-    }
+Router.delete("/delete/:_id", async(req,res)=> {
+  try {
+    const { _id } = req.params;
+
+    await ReviewModel.findByIdAndDelete(_id);
+
+    return res.json({review: "Successfully Deleted Review"});
+  } catch (error) {
+    return res.status(500).json({error: error.message});
+  }
 });
 
 export default Router;
