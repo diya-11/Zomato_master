@@ -1,5 +1,5 @@
 //HOC
-import HomeLayoutHOC from "./HOC/Home.HOC";
+import HomeLayoutHOC from "./HOC/Home.Hoc";
 
 //Component
 import Temp from "./Components/temp";

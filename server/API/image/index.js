@@ -48,3 +48,7 @@ return res.status(500).json({error: error.message});
 });
 
 export default Router;
+
+// GOOGLE_CLIENT_ID=117483858628-6lqhhaq4hbpg6lf4fmt4av4fcgcq9ckd.apps.googleusercontent.com
+// GOOGLE_CLIENT_SECRET=4E3IIqUa4iWfgF8JCHefKS2Z
+// 
